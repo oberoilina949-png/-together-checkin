@@ -1,0 +1,20 @@
+name: Verify website code
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install dependencies
+        run: npm install --omit=dev
+      - name: Validate backend syntax
+        run: node --check server.js
+      - name: Validate browser script syntax
+        run: |
+          node -e 'const fs=require("fs"); const vm=require("vm"); const html=fs.readFileSync("public/index.html","utf8"); const m=html.match(/<script>([\s\S]*?)<\/script>/); if(!m)process.exit(1); new vm.Script(m[1]);'
