@@ -1,0 +1,17 @@
+{
+  "name": "together-health-checkin",
+  "version": "1.0.0",
+  "private": true,
+  "description": "双人健康习惯打卡",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --check server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "pg": "^8.13.1"
+  }
+}
